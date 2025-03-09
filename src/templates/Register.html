@@ -2,12 +2,14 @@
 
 {% block title %} register {% endblock %}
 
+{% block head %} <link rel="stylesheet" href="{{ url_for('static',filename='styles_formularios.css')}}">{% endblock %}
+
 {% from 'bootstrap/form.html' import render_form %}
 {% from 'bootstrap/utils.html' import render_messages %}
 
 
 {% block main %}
-<h1> Formulario REGISTRO</h1>
+<h1>Registrarse</h1>
 {{ render_messages()}}
 {{ render_form(form,action='/register', method='post')}}
 

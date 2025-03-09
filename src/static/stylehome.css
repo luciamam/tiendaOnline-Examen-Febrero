@@ -1,0 +1,24 @@
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+h1{
+    color: red;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+button{
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: white;
+    font-weight: 700;
+    size: 40px;
+}

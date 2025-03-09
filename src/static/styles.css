@@ -16,8 +16,14 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 5px;
+    padding: 0 10px;
 
+}
+nav{
+    gap: 5px;
+}
+nav a{
+    color: black;
 }
 main{
     height: 70%;

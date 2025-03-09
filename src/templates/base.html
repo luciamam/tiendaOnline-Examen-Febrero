@@ -6,14 +6,16 @@
     <title>{% block title %} {% endblock %}</title>
     {{ bootstrap.load_css()}}
     <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">
+    {% block head %}{% endblock %}
+
 </head>
 <body>
 
     <header>
         <span> Home</span>
         <nav>
-            <a href="{{url_for('login')}}">Login</a>
-            <a href="{{url_for('login')}}">Register</a>
+            <a href="{{url_for('login')}}">Login |</a>
+            <a href="{{url_for('registrarse')}}">Register</a>
         </nav>
 
     </header>

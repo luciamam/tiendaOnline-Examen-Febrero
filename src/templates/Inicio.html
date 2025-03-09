@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} inicio {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static',filename='stylehome.css')}}">
+{% endblock %}
+
+{% block main %}
+
+<h1> WELLCOME TO THE PAGE</h1>
+<a href="{{url_for('registrarse')}}">
+    <button>Empezamos</button>
+</a>
+ 
+{% endblock %}
