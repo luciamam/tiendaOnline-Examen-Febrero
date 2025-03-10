@@ -2,6 +2,7 @@ from flask import Flask, render_template,request, redirect,url_for
 from dotenv import load_dotenv
 from formularios.forms import FormRegister,FormLogin
 from pymongo import MongoClient
+from werkzeug.security import generate_password_hash,check_password_hash
 
 from flask_bootstrap import Bootstrap4
 
@@ -26,26 +27,24 @@ users_collection=db['usuarios']
 def inicio():
     return render_template('Inicio.html')
 
-@app.route('/register',methods=['GET','POST'])
-def registrarse():
+@app.route('/register')
+def mostrar_formulario_register():
     form=FormRegister()
     
-
-    if request.method=='POST':
-        data=request.form
-
-        usuario={
-            "name":data["name"],
-            "email":data["email"],
-            "password":data["password"],
-        }
-        #GUARDAMOS LOS DATOS EN LA BASE DE DATOS EN nuestra collection 
-        users_collection.insert_one(usuario)
-        return redirect(url_for('perfil'))
-
-
-    
     return render_template('Register.html',form=form)
+
+@app.route('/register',methods=['POST'])
+def registrarse():
+    data=request.form
+    usuario={
+        "name":data["name"],
+        "email":data["email"],
+        "password":generate_password_hash(data["password"])
+    }
+    #ahora vamos a introducir este diccionario creado para insertarlo en la  nuestra collection
+    users_collection.insert_one(usuario)
+    return redirect(url_for('perfil'))
+
 
 
 @app.route('/perfil')
@@ -53,9 +52,10 @@ def perfil():
     return "bienvenido "
 
 @app.route('/login')
-def login():
+def mostrar_login():
     form=FormLogin()
     return render_template('Login.html',form=form)
+
 
 
 
