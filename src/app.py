@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request, redirect,url_for
+from flask import Flask, render_template,request, redirect,url_for,flash
 from dotenv import load_dotenv
 from formularios.forms import FormRegister,FormLogin
 from pymongo import MongoClient
@@ -55,6 +55,30 @@ def perfil():
 def mostrar_login():
     form=FormLogin()
     return render_template('Login.html',form=form)
+
+
+@app.route('/login',methods=['POST'])
+def iniciar_sesion():
+    #consigo el email y el password de la peticion 
+    email=request.form.get('email')
+    password=request.form.get('password')
+
+    #buscamos en nuesta collection el docuemento que tenga este correo , y extraemos este usuario , nos devuelve todo el objeto con todas sus propiedades 
+    usuario =users_collection.find_one({"email":email})
+    print(usuario)
+    if usuario:
+        if check_password_hash(usuario["password"],password) :
+            return redirect(url_for('perfil')) 
+        else :
+            flash("contraseña incorrecta","danger")
+            
+            return redirect(url_for('iniciar_sesion'))
+
+    else:
+        flash("usuario no registrado","success")
+       
+        return   redirect(url_for('iniciar_sesion'))
+    
 
 
 

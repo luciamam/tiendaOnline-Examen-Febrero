@@ -18,6 +18,6 @@ class FormLogin(FlaskForm):
     
     email=EmailField('Email',validators=[DataRequired(),Length(min=12,max=40)])
     password=PasswordField('password',validators=[DataRequired(),Length(min=4,max=12)])
-    submit=SubmitField('Rgistrarse')
+    submit=SubmitField('iniciar sesion')
 
 
