@@ -1,0 +1,15 @@
+{% extends 'baseProfile.html' %}
+{% block title %} profile {% endblock %}
+
+
+{% block main %}
+
+<section>
+    <h1>Wellcome </h1>
+    <!-- aqui es donde deberian los productos -->
+   <a href="{{url_for('mostrar_tienda')}}">
+    <button>Tienda</button>
+   </a>
+</section>
+
+{% endblock %}

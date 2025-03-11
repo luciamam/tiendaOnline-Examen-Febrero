@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+
+    {{ bootstrap.load_css()}}
+</head>
+<body>
+    <header>
+        <span>Home</span>
+        <nav>
+            <a href="{{url_for('perfil')}}">*Profile |</a>
+            <button> logout</button>
+        </nav>
+    </header>
+    <main>
+        {% block main %}
+        {% endblock %}
+
+
+    </main>
+    <footer>
+        <span>footer</span>
+    </footer>
+
+    {{ bootstrap.load_js()}}
+    
+</body>
+</html>
