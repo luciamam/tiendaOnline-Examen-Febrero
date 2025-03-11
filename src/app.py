@@ -75,13 +75,15 @@ def iniciar_sesion():
             return redirect(url_for('iniciar_sesion'))
 
     else:
-        flash("usuario no registrado","success")
+        flash("usuario no registrado","danger")
        
         return   redirect(url_for('iniciar_sesion'))
     
 
 
-
+@app.errorhandler(404)
+def pagina_404(error):
+    return render_template('Pagina_404.html')
 
 
 
