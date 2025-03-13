@@ -5,6 +5,10 @@ from pymongo import MongoClient
 from werkzeug.security import generate_password_hash,check_password_hash
 #para jwt
 from flask_jwt_extended import JWTManager,jwt_required,get_jwt_identity,create_access_token
+#para el json
+import json
+#para poder leer el _id de  mongo 
+from bson import ObjectId
 
 
 from flask_bootstrap import Bootstrap4
@@ -46,11 +50,13 @@ def registrarse():
         "email":data["email"],
         "password":generate_password_hash(data["password"])
     }
- 
+
     documento_usuario=users_collection.insert_one(usuario) #crear  un docuemento 
     id_usuario=documento_usuario.inserted_id # id es un tipo de dato ObjectId propio de MongoDB
-    print("este es el id de mi usuario ",id_usuario)
+    id_usuario=str(id_usuario)  #para quitarle el objetID
+    #print("este es el id de mi usuario ",id_usuario)
     response=make_response(redirect(url_for('perfil')))
+    #aqui en la cookie tenemos que enviarle el id sin ObjectId 
     create_token=create_access_token(identity=str({"id":id_usuario})) #CONVERTIMO EL OBJETO EN STR porse se guarda en la cookie, y esta guarda datos com str 
     response.set_cookie('access_token_cookie',create_token)
     
@@ -58,11 +64,7 @@ def registrarse():
 
 
 
-@app.route('/perfil')
-#donde queremos localizar el token 
-@jwt_required(locations=["cookies"])
-def perfil():
-    return render_template("Profile.html")
+
 
 @app.route('/login')
 def mostrar_login():
@@ -78,13 +80,16 @@ def iniciar_sesion():
 
     
     usuario =users_collection.find_one({"email":email})# busca el usuario con este email pero devuelve todo el objeto del usuario 
-    print(usuario)
+    print("el usuario es el siguiente",usuario)
     if usuario:
         if check_password_hash(usuario["password"],password) :
-            id_usuario=usuario.inserted_id
-            print("este es el id de mi usuario ",id_usuario)
+             
+            # id_usuario=usuario.inserted_id por que no estamos insertando usuario 
+            #print("este es el id de mi usuario ",usuario['_id'])
             #con esto voy a crear el token 
             response=make_response(redirect(url_for('perfil')))
+            id_usuario=str(usuario['_id'])  #lo paso a str para no guarda el id en el tipo de dato ObjectId 
+            
             create_token=create_access_token(identity=str({"id":id_usuario}))
             response.set_cookie('access_token_cookie',create_token)
             return response
@@ -100,6 +105,22 @@ def iniciar_sesion():
 
         return   redirect(url_for('iniciar_sesion'))
     
+
+@app.route('/perfil')
+#donde queremos localizar el token 
+@jwt_required(locations=["cookies"])
+def perfil():
+    id_usuario=get_jwt_identity() #{'id:"12222233232323232"} sigue siendo un str 
+    print("el id_usuario en la ruta perfil ",id_usuario)
+    #print("tipo de dato id_usuario",type(id_usuario))
+    id_usuario=id_usuario.replace("'",'"') # utilizo replace para que tenga formato json 
+    id_usuario=json.loads(id_usuario)  #y aqui es donde haga a diccionario u objeto 
+    current_user=users_collection.find_one({"_id":ObjectId(id_usuario['id'])})
+    print("este el current_user",current_user)
+    name=current_user['name']
+
+    return render_template("Profile.html",username=name)
+
 
 @app.route('/tienda')
 def  mostrar_tienda():
