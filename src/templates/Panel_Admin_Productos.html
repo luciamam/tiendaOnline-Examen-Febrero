@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section>
+        <h1>mis productos</h1>
+        <ul>
+            {% for producto in productos %} 
+
+             <li>{{ producto.nombre}}
+                <a href="/admin/producto/editar/{{produccto_id}}">editar </a>
+                <a href="/admin/producto/eliminar/{{producto_id}}">eliminar</a>
+
+             </li>
+            {% endfor %}
+        </ul>
+
+    </section>
+     <a href="/admin/productos">ver productos</a>
+     
+    
+</body>
+</html>

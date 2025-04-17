@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>panel de admin</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style_admin.css')}}">
+</head>
+<body>
+    <main id="contenedor-principal">
+        <h1> Panel de administrador </h1>
+        <a href="/admin/usuario/anydir">AGREGAR USUAIOS</a>
+        <ul>
+            {% for usuario in usuarios %}
+            <li>
+                <span>{{ usuario.name}}</span> 
+                <a href="/admin/usuario/editar/{{usuario._id}}">editar</a>
+                <a id="eliminar" href="/admin/usuario/eliminar/{{usuario._id}}">eliminar</a>
+                <a id="datos" href="/admin/usuario/datosUsuario/{{usuario._id}}">Datos Usuario</a>
+        
+
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('panel_admin_productos')}}">Panel productos</a>
+
+      
+    </main>
+
+
+
+    
+</body>
+</html>

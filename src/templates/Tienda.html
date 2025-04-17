@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <header style="background-color: aqua;">
+            <nav>
+                
+                <a href="/carrito">carrito</a>
+            </nav>
+        </header>
+       <section>
+        <ul>
+            {% for producto in productos %}
+               
+                    <!-- <a href="{{ url_for('mostrar_producto',id=producto._id)}}">ver producto</a> -->
+                    <div>
+                        <a href='/productos/{{producto._id}}'>{{producto.nombre}}</a>
+                        <!-- dia 05-->
+                        <a href="/anydircarrito/{{ producto._id}}">
+                            <button>añadir al carrito</button>
+                        </a>
+                    </div>
+                
+            {% endfor %}
+        </ul>
+       </section>
+       
+    </main>
+    
+</body>
+</html>

@@ -1,15 +1,24 @@
 {% extends 'baseProfile.html' %}
 {% block title %} profile {% endblock %}
+{ %}
+
 
 
 {% block main %}
+<div class="d-flex flex-column align-items-center justify-content-center border border-primary ">
 
-<section>
-    <h1>Wellcome </h1>
-    <!-- aqui es donde deberian los productos -->
-   <a href="{{url_for('mostrar_tienda')}}">
-    <button>Tienda</button>
-   </a>
-</section>
+    <section class="d-flex flex-column align-items-center justify-content-center  ">
+        <h1>Wellcome  {{ name }}</h1>
+        <span> contador de visitas del usuario : {{ contador }}</span>
+    
+
+      <a href="{{ url_for('mostrar_tienda')}}">
+        <button>tienda</button>
+      </a>
+    
+    </section>
+</div>
+
+
 
 {% endblock %}

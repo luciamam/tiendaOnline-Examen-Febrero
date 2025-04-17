@@ -1,0 +1,132 @@
+*{
+    padding: 0;
+    margin: 0; 
+    box-sizing: border-box;
+
+
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#contenedor-principal,#contenedor-editar{
+  
+    display: flex;
+    height: 30vw;
+    width: 50vw;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid red; */
+    flex-direction: column;
+    gap:10px
+
+}
+
+h1{
+    text-shadow: 4px 4px 4px  rgba(0, 0, 0, .34);
+    font-size: 60px;
+    letter-spacing: 5px;
+    
+  
+}
+ul{
+    /* border: 2px solid  green; */
+    width: 80%;
+    height: 60%;
+    overflow-y: scroll;
+    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, .34);
+    border: 4px;
+   display:flex ;
+   flex-direction: column;
+   gap: 5px;
+  align-items: center;
+  padding-top: 20px;
+    
+}
+li{
+    
+    width: 80%;
+    /* background-color: #ccc; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 5px;
+
+    
+}
+li a{
+    background-color: #2ec4b6;
+    padding: 0px 4px;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    height: 40px;
+    width: 80px;
+    display:  flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 700;
+    
+
+}
+li #eliminar{
+    background-color: #e71d36;
+}
+li #datos{
+    background-color: #4a5759;
+    width: 120px;
+}
+
+/*#######################################################33
+ formulario edita 
+ */
+
+#formulario-editar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid red;
+    flex-direction: column;
+    width: 30vw;
+    height: 30vh;
+    gap: 5px;
+    
+    box-shadow: 4px,4px,4px,4px,rgba(0, 0, 0, .34);
+}
+#formulario-editar div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+#formulario-editar div label{
+    width: 200px ;
+    /* border: 2px solid red; */
+    padding: 5px;
+   
+}
+#formulario-editar div  input{
+    width: 250px ;
+    outline: none;
+    border-radius: 4px;
+
+    padding: 5px;
+   
+}
+#formulario-editar  button{
+    width: 100px ;
+    cursor: pointer;
+    border-radius: 4px;
+
+    padding: 5px;
+    myse
+   
+}
